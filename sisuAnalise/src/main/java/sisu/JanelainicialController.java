@@ -150,7 +150,7 @@ public class JanelainicialController implements Initializable {
 
         botao4.setDisable(!validaCurso);
         botao6.setDisable(!validaDemanda || validaAno);
-        
+        botao7.setDisable(!validaDemanda || !validaCurso || !validaCampus || !validaAno);
         botao10.setDisable(!validaAno || !validaDemanda);
         botao11.setDisable(!validaAno || validaDemanda);
     }
@@ -281,6 +281,21 @@ public class JanelainicialController implements Initializable {
 
     @FXML
     private void abrirF7(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("simulacaoEspecifica.fxml")); 
+            AnchorPane abaContent = loader.load();
+
+            Tab novaAba = new Tab("Simulacao Especifica");
+            novaAba.setContent(abaContent);
+            tabPane.getTabs().add(novaAba);
+            tabPane.getSelectionModel().select(novaAba);
+
+            SimulacaoEspecificaController controllerF7 = loader.getController();
+            controllerF7.setDados(filtrarDados());
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
