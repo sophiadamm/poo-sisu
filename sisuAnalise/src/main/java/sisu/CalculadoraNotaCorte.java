@@ -33,7 +33,7 @@ public class CalculadoraNotaCorte {
     }
     
     public static Map<String, Double> calcularNotaCorte(List<Candidato> candidatos, boolean fcampus){
-        Map<String, Double> resultado = new HashMap<>();
+        Map<String, Double> resultado = new TreeMap<>();
         
         for(Candidato c : candidatos){
             String curr = c.getCurso();

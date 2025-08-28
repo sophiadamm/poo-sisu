@@ -69,8 +69,20 @@ public class SimulacaoCursosController implements Initializable {
         }
         ObservableList<String> dadosListaView = FXCollections.observableArrayList(listaC);
         listaCursos.setItems(dadosListaView);
-        System.out.println(quant);
-        System.out.println(nota);
+        
+        int totalCursos = notasCorte.size();
+
+        double percentual = 0.0;
+        if (totalCursos > 0) {
+            percentual = (double) quant / totalCursos * 100;
+        }
+
+        String mensagemFormatada = String.format(
+            "Você passaria em %d cursos do total de %d.\nIsso representa %.2f%%.",
+            quant, totalCursos, percentual
+        );
+
+        mensagem.setText(mensagemFormatada);
         
     }
 
