@@ -84,9 +84,9 @@ public class JanelainicialController implements Initializable {
         
         if (dadosSisu != null && !dadosSisu.isEmpty()) {
             for (Candidato candidato : dadosSisu) {
-                campus.add(candidato.campus);
-                demandas.add(candidato.demanda);
-                cursos.add(candidato.curso);
+                campus.add(candidato.getCampus());
+                demandas.add(candidato.getDemanda());
+                cursos.add(candidato.getCurso());
             }
             
             filtroDemanda.getItems().addAll(demandas);
@@ -106,10 +106,10 @@ public class JanelainicialController implements Initializable {
         ArrayList<Candidato> dadosFiltrados = new ArrayList<>();
 
         for (Candidato candidato : dadosSisu) {
-            boolean validaAno = (anoSelecionado == null || String.valueOf(candidato.ano).equals(anoSelecionado));
-            boolean validaCurso = (cursoSelecionado == null || candidato.curso.equals(cursoSelecionado));
-            boolean validaCampus = (campusSelecionado == null || candidato.campus.equals(campusSelecionado));
-            boolean validaDemanda = (demandaSelecionada == null || candidato.demanda.equals(demandaSelecionada));
+            boolean validaAno = (anoSelecionado == null || String.valueOf(candidato.getAno()).equals(anoSelecionado));
+            boolean validaCurso = (cursoSelecionado == null || candidato.getCurso().equals(cursoSelecionado));
+            boolean validaCampus = (campusSelecionado == null || candidato.getCampus().equals(campusSelecionado));
+            boolean validaDemanda = (demandaSelecionada == null || candidato.getDemanda().equals(demandaSelecionada));
 
             if (validaAno && validaCurso && validaCampus && validaDemanda) {
                 dadosFiltrados.add(candidato);
@@ -161,13 +161,11 @@ public class JanelainicialController implements Initializable {
         filtroDemanda.valueProperty().addListener((obs, oldVal, newVal) ->  atualizar());
         filtroCurso.valueProperty().addListener((obs, oldVal, newVal) -> {
                         atualizar();
-                        System.out.println(1);
                         mark = true;
                         });
         
         filtroCurso.getEditor().textProperty().addListener((obs, oldV, newV) -> {
             if(mark == true){
-                System.out.println("Entrou");
                 mark = false;
                 return;
             }
@@ -302,7 +300,7 @@ public class JanelainicialController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("pizzademanda.fxml")); 
             AnchorPane abaContent = loader.load();
 
-            Tab novaAba = new Tab("N sei ainda");
+            Tab novaAba = new Tab("Percentual Demanda");
             novaAba.setContent(abaContent);
             tabPane.getTabs().add(novaAba);
             tabPane.getSelectionModel().select(novaAba);
