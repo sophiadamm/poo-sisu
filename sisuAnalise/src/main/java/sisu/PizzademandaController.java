@@ -25,7 +25,6 @@ public class PizzademandaController implements Initializable {
     @FXML
     private ListView<String> listaFiltros;
     private ArrayList<Candidato> dados;
-    private ArrayList<String> filtros;
     private Set<String> demandas;
     
     private Map<String, Integer> findFrequence(){
@@ -37,7 +36,7 @@ public class PizzademandaController implements Initializable {
         }
         
         for (Candidato c : dados) {
-            freq.put(c.demanda, freq.get(c.demanda) + 1);
+            freq.put(c.getDemanda(), freq.get(c.getDemanda()) + 1);
         }
         return freq;
     }
@@ -46,35 +45,42 @@ public class PizzademandaController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
     }    
 
-    public void setDados(ArrayList<Candidato> dados, ArrayList<String> filtros, Set<String> demandas) {
+     public void setDados(ArrayList<Candidato> dados, ArrayList<String> filtros, Set<String> demandas) {
         this.dados = dados;
-        this.filtros = filtros;
         this.demandas = demandas;
-        
+
         Map<String, Integer> frequencias = findFrequence();
-        ObservableList<PieChart.Data> grafDados = FXCollections.observableArrayList();
         ObservableList<String> dadosListaView = FXCollections.observableArrayList(filtros);
-        
+
         int total = dados.size();
         dadosListaView.add(String.format("Total: %s", total));
-        
-        // 3. Percorra o Map e popule o ObservableList
+
         for (Map.Entry<String, Integer> entry : frequencias.entrySet()) {
-            grafDados.add(new PieChart.Data(entry.getKey(), entry.getValue()));
-            String txt = String.format("%s : %d", entry.getKey(),entry.getValue());
+            String txt = String.format("%s : %d", entry.getKey(), entry.getValue());
             dadosListaView.add(txt);
         }
-       
+
+        listaFiltros.setItems(dadosListaView);
+        criarGrafico(frequencias, total);
+    }
+     
+    private void criarGrafico(Map<String, Integer> frequencias, int total) {
+        ObservableList<PieChart.Data> grafDados = FXCollections.observableArrayList();
+
+        for (Map.Entry<String, Integer> entry : frequencias.entrySet()) {
+            grafDados.add(new PieChart.Data(entry.getKey(), entry.getValue()));
+        }
+
         grafDados.forEach(data ->
             data.nameProperty().bind(
                 Bindings.concat(
-                    data.getName(), " ", String.format("%.1f%%", ((data.getPieValue() / (double) total) * 100))
+                    data.getName(), " ",
+                    String.format("%.1f%%", (data.getPieValue() / (double) total) * 100)
                 )
             )
         );
 
-        graficoPizza.getData().addAll(grafDados);
-        listaFiltros.setItems(dadosListaView);
+        graficoPizza.getData().setAll(grafDados);
     }
     
 }

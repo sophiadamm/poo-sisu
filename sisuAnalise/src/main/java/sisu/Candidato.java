@@ -1,9 +1,9 @@
 package sisu;
 
 public class Candidato{
-    String numero_enem, nome, curso, campus, demanda, estado, colocacao;
-    double media;
-    int ano;
+    private String numero_enem, nome, curso, campus, demanda, estado, colocacao;
+    private double media;
+    private int ano;
     
     public Candidato(String [] c){        
         numero_enem = c[0];
@@ -102,7 +102,28 @@ public class Candidato{
         return this.ano;
     }
     
+    public String getDemanda(){
+        return this.demanda;
+    }
+    
     public double getMedia(){
         return this.media;
     }
+    
+    public String getNumero(){
+        return this.numero_enem;
+    }
+    
+    public String getEstado(){
+        return this.estado;
+    }
+    
+    public String getColocacao(){
+        return this.colocacao;
+    }
+    
+    public String getNome(){
+        return this.nome;
+    }
+    
 }

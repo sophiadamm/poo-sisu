@@ -27,7 +27,7 @@ public class ConsultanomeController {
         String nome = nomeBusca.getText().toUpperCase();
         
         for(Candidato candidato : dados){
-            if(candidato.nome.equals(nome)){
+            if(candidato.getNome().equals(nome)){
                 resultadoNome.setText(candidato.toString());
                 achou = true;
                 break;
