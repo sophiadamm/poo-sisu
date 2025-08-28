@@ -147,7 +147,7 @@ public class JanelainicialController implements Initializable {
 
         botao1.setDisable(!validaAno);
         botao2.setDisable(!validaCampus);
-        botao3.setDisable(!validaDemanda);
+
         botao4.setDisable(!validaCurso);
         
         botao10.setDisable(!validaAno || !validaDemanda);
@@ -190,6 +190,7 @@ public class JanelainicialController implements Initializable {
     public void initialize(URL url, ResourceBundle rb){
         this.dadosSisu = Dados.getInstancia().getListaCandidatos();
         botao12.setDisable(false);
+        botao3.setDisable(false);
         preencherFiltros();
         adiocionarListeners();
     }    
@@ -236,6 +237,21 @@ public class JanelainicialController implements Initializable {
 
     @FXML
     private void abrirF3(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("histograma.fxml")); 
+            AnchorPane abaContent = loader.load();
+
+            Tab novaAba = new Tab("Histograma de Notas");
+            novaAba.setContent(abaContent);
+            tabPane.getTabs().add(novaAba);
+            tabPane.getSelectionModel().select(novaAba);
+
+            HistogramaController controllerF3 = loader.getController();
+            controllerF3.setDados(filtrarDados(), filtrosSelecionados());
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
