@@ -8,15 +8,7 @@ public class Candidato{
     public Candidato(String [] c){        
         numero_enem = c[0];
         nome = c[1];
-        
-        c[2] = c[2].replace(" - ", " ");
-        
-        if(c[2].startsWith("C. D")){
-            curso = "CIENCIA" + c[2].substring(2);
-        }else if(c[2].startsWith("C.")){
-            curso = "CIENCIAS" + c[2].substring(2);
-        }else curso = c[2];
- 
+        curso = tratamentoCurso(c[2]);
         
         if (c[3].equals("CAMPUS DO SER")) {
             campus = "CAMPUS DO SERTAO";
@@ -41,6 +33,34 @@ public class Candidato{
                "Estado: " + this.estado + "\n" +
                "Demanda: " + this.demanda + "\n";
     }
+    
+     public String tratamentoCurso(String s) {
+        //padronizacao do nome dos cursos
+        s = s.trim();
+        s = s.replace(" - ", " ");
+        s = s.replace("BACHARELADO", "");
+        s = s.replace("LICENCIATURA", "LIC");
+        s = s.replace(" BAC ", " ");
+        s = s.replace("-", "");
+        s = s.replace("BAC", "");
+        s = s.replace("INTEGRAL", "INT");
+        s = s.replace("NOTURNO", "NOT");
+        s = s.replace("VESPERTINO", "VESP");
+        s = s.replace("(VES)", "(VESP)");
+        s = s.replace("MATUTINO", "MAT");
+        
+        if(s.equals("MEDICINA VETERINARIA(INT)")){
+            return "MEDICINA VETERINARIA (INT)";
+        }else if(s.equals("MATEMATICALIC (VESP)")){
+            return "MATEMATICA LIC (VESP)";
+        }else if(s.equals("LETRAS PORTESPANHOLLIC(VESP)")){
+            return "LETRAS PORTESPANHOL LIC (VESP)";
+        } else if(s.startsWith("C. D")){
+            return "CIENCIA" + s.substring(2);
+        }else if(s.startsWith("C.")){
+            return "CIENCIAS" + s.substring(2);
+        }else return s;
+     }
     
     public String tratamentoDemanda(String s) {
         if (s.startsWith("A")) { 
