@@ -145,10 +145,11 @@ public class JanelainicialController implements Initializable {
         boolean validaDemanda = (demandaSelecionada != null);
         boolean validaCurso = (cursoSelecionado != null && cursos.contains(cursoSelecionado));
 
-        botao1.setDisable(!validaAno);
+        botao1.setDisable(!validaCurso);
         botao2.setDisable(!validaCampus);
 
-        botao4.setDisable(!validaCurso);
+        botao4.setDisable(!validaAno);
+       
         botao6.setDisable(!validaDemanda || validaAno);
         botao7.setDisable(!validaDemanda || !validaCurso || !validaCampus || !validaAno);
         botao10.setDisable(!validaAno || !validaDemanda);
@@ -214,7 +215,7 @@ public class JanelainicialController implements Initializable {
     @FXML
     private void abrirF1(ActionEvent event) {
         try {
-           FXMLLoader loader = new FXMLLoader(getClass().getResource("pizzademanda.fxml")); 
+           FXMLLoader loader = new FXMLLoader(getClass().getResource("utilidade1.fxml")); 
             AnchorPane abaContent = loader.load();
 
             Tab novaAba = new Tab("Gráfico ...");
@@ -222,12 +223,14 @@ public class JanelainicialController implements Initializable {
             tabPane.getTabs().add(novaAba);
             tabPane.getSelectionModel().select(novaAba);
 
-            PizzademandaController controllerF11 = loader.getController();
-            controllerF11.setDados(filtrarDados(), filtrosSelecionados(), demandas);
+            Utilidade1Controller controllerF1 = loader.getController();
+            String cursoSelecionado = filtroCurso.getSelectionModel().getSelectedItem();
+            controllerF1.setDados(filtrarDados(), cursoSelecionado);
         }catch (IOException e) {
             e.printStackTrace();
         }
-    }    
+        System.out.println("passou");
+    }     
     
     @FXML
     private void abrirF2(ActionEvent event) {

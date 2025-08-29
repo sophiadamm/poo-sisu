@@ -39,9 +39,15 @@ public class Utilidade1Controller implements Initializable {
     
     private String cursosel;
     
-    public void setCurso(String curso){
+    public void setDados(ArrayList<Candidato> dados, String curso){
+        this.dados = dados;
         this.cursosel = curso;
         grafico();
+    }
+    
+        @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        // TODO
     }
     
     public void grafico(){
@@ -54,6 +60,7 @@ public class Utilidade1Controller implements Initializable {
             
             if(!dadosAgrupados.containsKey(c.getCampus())) {
                 dadosAgrupados.put(c.getCampus(), new HashMap<>());
+                System.out.println(c.getCampus());
             }
             
             Map<Integer, Double> notaDeCorte = dadosAgrupados.get(c.getCampus());
@@ -67,6 +74,18 @@ public class Utilidade1Controller implements Initializable {
                 }
             }
         }
+        
+        lineChart.getData().clear();
+        
+        eixoX.setAutoRanging(false);
+        eixoX.setLowerBound(2019);
+        eixoX.setUpperBound(2025);
+        eixoX.setTickUnit(1);
+        
+        eixoY.setAutoRanging(false);
+        eixoY.setLowerBound(0);
+        eixoY.setUpperBound(1000);
+        eixoY.setTickUnit(100);
         
         for(String campus : dadosAgrupados.keySet()){
             XYChart.Series<Number, Number> serie = new XYChart.Series<>();
@@ -85,15 +104,6 @@ public class Utilidade1Controller implements Initializable {
             lineChart.getData().add(serie);
         }
        
-    }
-    
-    public void setDados(ArrayList<Candidato> dados) {
-        this.dados= dados;
-    }
-    
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
-    
+    }   
+
 }
