@@ -145,8 +145,8 @@ public class JanelainicialController implements Initializable {
         boolean validaDemanda = (demandaSelecionada != null);
         boolean validaCurso = (cursoSelecionado != null && cursos.contains(cursoSelecionado));
 
-        botao1.setDisable(!validaCurso);
-        botao2.setDisable(!validaCampus);
+        botao1.setDisable(!validaCurso || validaAno);
+        botao2.setDisable(!validaCurso);
 
         botao4.setDisable(!validaAno);
        
@@ -249,6 +249,24 @@ public class JanelainicialController implements Initializable {
     
     @FXML
     private void abrirF2(ActionEvent event) {
+        if(!verificarLista()){
+            return;
+        }
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("graficoNotas.fxml")); 
+            AnchorPane abaContent = loader.load();
+
+            Tab novaAba = new Tab("Análise de notas");
+            novaAba.setContent(abaContent);
+            tabPane.getTabs().add(novaAba);
+            tabPane.getSelectionModel().select(novaAba);
+
+            GraficoNotasController controllerF1 = loader.getController();
+            String cursoSelecionado = filtroCurso.getSelectionModel().getSelectedItem();
+            controllerF1.setDados(filtrarDados(), cursoSelecionado);
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
