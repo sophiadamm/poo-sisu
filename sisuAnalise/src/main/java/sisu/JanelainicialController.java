@@ -191,7 +191,19 @@ public class JanelainicialController implements Initializable {
         botao3.setDisable(false);
         preencherFiltros();
         adiocionarListeners();
-    }    
+    } 
+    
+    private boolean verificarLista(){
+        if (filtrarDados() == null || filtrarDados().isEmpty()) { 
+            Alert a = new Alert(Alert.AlertType.ERROR); 
+            a.setTitle("Dados insuficientes"); 
+            a.setHeaderText("Lista de aprovados vazia"); 
+            a.setContentText("Não há dados de aprovados carregados."); 
+            a.showAndWait(); 
+            return false; 
+        }
+        return true;
+    }
 
 
     @FXML
@@ -213,6 +225,9 @@ public class JanelainicialController implements Initializable {
 
     @FXML
     private void abrirF1(ActionEvent event) {
+        if(!verificarLista()){
+            return;
+        }
         try {
            FXMLLoader loader = new FXMLLoader(getClass().getResource("utilidade1.fxml")); 
             AnchorPane abaContent = loader.load();
@@ -237,6 +252,9 @@ public class JanelainicialController implements Initializable {
 
     @FXML
     private void abrirF3(ActionEvent event) {
+        if(!verificarLista()){
+            return;
+        }
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("histograma.fxml")); 
             AnchorPane abaContent = loader.load();
@@ -256,6 +274,28 @@ public class JanelainicialController implements Initializable {
 
     @FXML
     private void abrirF4(ActionEvent event) {
+        if(!verificarLista()){
+            return;
+        }
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("listaTop10.fxml")); 
+            AnchorPane abaContent = loader.load();
+
+            Tab novaAba = new Tab("Lista Top 10");
+            novaAba.setContent(abaContent);
+            tabPane.getTabs().add(novaAba);
+            tabPane.getSelectionModel().select(novaAba);
+
+            ListaTop10Controller controllerF4 = loader.getController();
+            String anoString = filtroAno.getSelectionModel().getSelectedItem();
+            int anoSelecionado = -1;
+            if(anoString != null && !anoString.isEmpty()){
+                anoSelecionado = Integer.parseInt(anoString);
+            }
+            controllerF4.setDados(filtrarDados(), anoSelecionado);
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -280,6 +320,9 @@ public class JanelainicialController implements Initializable {
 
     @FXML
     private void abrirF10(ActionEvent event) {
+        if(!verificarLista()){
+            return;
+        }
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("simulacaoCursos.fxml")); 
             AnchorPane abaContent = loader.load();
@@ -298,6 +341,9 @@ public class JanelainicialController implements Initializable {
 
     @FXML
     private void abrirF11(ActionEvent event) {
+        if(!verificarLista()){
+            return;
+        }
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("pizzademanda.fxml")); 
             AnchorPane abaContent = loader.load();
@@ -316,6 +362,9 @@ public class JanelainicialController implements Initializable {
 
      @FXML
     private void abrirF12(ActionEvent event) {
+        if(!verificarLista()){
+            return;
+        }
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("consultanome.fxml")); 
             AnchorPane abaContent = loader.load();
