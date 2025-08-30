@@ -54,10 +54,6 @@ public class JanelainicialController implements Initializable {
     @FXML
     private Button botao10;
     @FXML
-    private Button botao11;
-    @FXML
-    private Button botao12;
-    @FXML
     private TextArea txtInfo;
     @FXML
     private Button botaoAjuda;
@@ -151,13 +147,11 @@ public class JanelainicialController implements Initializable {
         botao4.setDisable(!validaAno);
         botao5.setDisable(!validaAno);
         
-
-       
         botao6.setDisable(!validaDemanda || validaAno);
         botao7.setDisable(!validaDemanda || !validaCurso || !validaCampus || !validaAno);
 
-        botao10.setDisable(!validaAno || !validaDemanda);
-        botao11.setDisable(!validaAno || validaDemanda);
+        botao8.setDisable(!validaAno || !validaDemanda);
+        botao9.setDisable(!validaAno || validaDemanda);
     }
     
     private void adiocionarListeners(){
@@ -192,7 +186,7 @@ public class JanelainicialController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb){
         this.dadosSisu = Dados.getInstancia().getListaCandidatos();
-        botao12.setDisable(false);
+        botao10.setDisable(false);
         botao3.setDisable(false);
         preencherFiltros();
         adiocionarListeners();
@@ -237,7 +231,7 @@ public class JanelainicialController implements Initializable {
            FXMLLoader loader = new FXMLLoader(getClass().getResource("utilidade1.fxml")); 
             AnchorPane abaContent = loader.load();
 
-            Tab novaAba = new Tab("Gráfico ...");
+            Tab novaAba = new Tab("Gráfico");
             novaAba.setContent(abaContent);
             tabPane.getTabs().add(novaAba);
             tabPane.getSelectionModel().select(novaAba);
@@ -387,14 +381,6 @@ public class JanelainicialController implements Initializable {
 
     @FXML
     private void abrirF8(ActionEvent event) {
-    }
-
-    @FXML
-    private void abrirF9(ActionEvent event) {
-    }
-
-    @FXML
-    private void abrirF10(ActionEvent event) {
         if(!verificarLista()){
             return;
         }
@@ -407,15 +393,15 @@ public class JanelainicialController implements Initializable {
             tabPane.getTabs().add(novaAba);
             tabPane.getSelectionModel().select(novaAba);
 
-            SimulacaoCursosController controllerF10 = loader.getController();
-            controllerF10.setDados(filtrarDados());
+            SimulacaoCursosController controllerF8 = loader.getController();
+            controllerF8.setDados(filtrarDados());
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     @FXML
-    private void abrirF11(ActionEvent event) {
+    private void abrirF9(ActionEvent event) {
         if(!verificarLista()){
             return;
         }
@@ -428,16 +414,16 @@ public class JanelainicialController implements Initializable {
             tabPane.getTabs().add(novaAba);
             tabPane.getSelectionModel().select(novaAba);
 
-            PizzademandaController controllerF11 = loader.getController();
-            controllerF11.setDados(filtrarDados(), filtrosSelecionados(), demandas);
+            PizzademandaController controllerF9 = loader.getController();
+            controllerF9.setDados(filtrarDados(), filtrosSelecionados(), demandas);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-     @FXML
-    private void abrirF12(ActionEvent event) {
-        if(!verificarLista()){
+    @FXML
+    private void abrirF10(ActionEvent event) {
+       if(!verificarLista()){
             return;
         }
         try {
@@ -449,13 +435,12 @@ public class JanelainicialController implements Initializable {
             tabPane.getTabs().add(novaAba);
             tabPane.getSelectionModel().select(novaAba);
 
-            ConsultanomeController controllerF12 = loader.getController();
-            controllerF12.setDados(filtrarDados());
+            ConsultanomeController controllerF10 = loader.getController();
+            controllerF10.setDados(filtrarDados());
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-   
     
     @FXML
     void limparAno(ActionEvent event) {
