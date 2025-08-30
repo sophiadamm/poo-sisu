@@ -2,6 +2,7 @@ import sys
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from visual.ui_janelaprincipal import Ui_MainWindow
+from dados import Dados
 
 class App(QMainWindow):
     def __init__(self):
@@ -11,7 +12,8 @@ class App(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)  # monta a interface dentro deste QMainWindow
 
-        # Agora você pode acessar widgets via self.ui.nome_do_widget
+        dados = Dados.get_instancia()
+
         self.setWindowTitle("Análise dos dados do Sisu")
         self.setMinimumSize(600, 600)
         self.resize(600, 600)  # Define o tamanho inicial da janela
