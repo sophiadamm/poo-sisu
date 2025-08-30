@@ -1,7 +1,7 @@
 import sys
-from PyQt5 import QtWidgets, uic
+from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QApplication, QMainWindow
-from ui_janelaprincipal import Ui_MainWindow
+from visual.ui_janelaprincipal import Ui_MainWindow
 
 class App(QMainWindow):
     def __init__(self):
