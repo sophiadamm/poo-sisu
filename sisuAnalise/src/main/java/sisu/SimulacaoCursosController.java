@@ -87,7 +87,7 @@ public class SimulacaoCursosController implements Initializable {
     }
 
     public void setDados(ArrayList<Candidato> dados) {
-        this.dados = dados;    
+        this.dados = dados;   
         this.notasCorte = CalculadoraNotaCorte.calcularNotaCorte(dados, false);
     }
     
