@@ -145,13 +145,17 @@ public class JanelainicialController implements Initializable {
         boolean validaDemanda = (demandaSelecionada != null);
         boolean validaCurso = (cursoSelecionado != null && cursos.contains(cursoSelecionado));
 
-        botao1.setDisable(!validaCurso || validaAno);
-        botao2.setDisable(!validaCurso);
+        botao1.setDisable(!validaCurso);
+        botao2.setDisable(!validaCampus);
 
         botao4.setDisable(!validaAno);
+        botao5.setDisable(!validaAno);
+        
+
        
         botao6.setDisable(!validaDemanda || validaAno);
         botao7.setDisable(!validaDemanda || !validaCurso || !validaCampus || !validaAno);
+
         botao10.setDisable(!validaAno || !validaDemanda);
         botao11.setDisable(!validaAno || validaDemanda);
     }
@@ -256,12 +260,12 @@ public class JanelainicialController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("graficoNotas.fxml")); 
             AnchorPane abaContent = loader.load();
 
-            Tab novaAba = new Tab("Análise de notas");
+            Tab novaAba = new Tab("Gráfico");
             novaAba.setContent(abaContent);
             tabPane.getTabs().add(novaAba);
             tabPane.getSelectionModel().select(novaAba);
 
-            GraficoNotasController controllerF1 = loader.getController();
+            Utilidade1Controller controllerF1 = loader.getController();
             String cursoSelecionado = filtroCurso.getSelectionModel().getSelectedItem();
             controllerF1.setDados(filtrarDados(), cursoSelecionado);
         }catch (IOException e) {
@@ -319,6 +323,28 @@ public class JanelainicialController implements Initializable {
 
     @FXML
     private void abrirF5(ActionEvent event) {
+        if(!verificarLista()){
+            return;
+        }
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("analiseEstado.fxml")); 
+            AnchorPane abaContent = loader.load();
+
+            Tab novaAba = new Tab("Analise sobre Estado");
+            novaAba.setContent(abaContent);
+            tabPane.getTabs().add(novaAba);
+            tabPane.getSelectionModel().select(novaAba);
+
+            AnaliseEstadoController controllerF5 = loader.getController();
+            String anoString = filtroAno.getSelectionModel().getSelectedItem();
+            int anoSelecionado = -1;
+            if(anoString != null && !anoString.isEmpty()){
+                anoSelecionado = Integer.parseInt(anoString);
+            }
+            controllerF5.setDados(filtrarDados(), anoSelecionado);
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

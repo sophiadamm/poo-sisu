@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sisu.AnaliseEstadoController">
+   <children>
+      <TableView fx:id="tableView" layoutX="14.0" layoutY="49.0" prefHeight="270.0" prefWidth="416.0" AnchorPane.bottomAnchor="81.39999999999998" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="170.79999999999995" AnchorPane.topAnchor="49.0">
+        <columns>
+          <TableColumn fx:id="estados" prefWidth="150.0" text="Estado" />
+          <TableColumn fx:id="numerodeAlunos" prefWidth="150.0" text="Número de Alunos" />
+            <TableColumn fx:id="media" prefWidth="150.0" text="Média" />
+            <TableColumn fx:id="porcentagem" prefWidth="150.0" text="Porcentagem (%)" />
+        </columns>
+      </TableView>
+      <Label fx:id="titulo" alignment="CENTER" layoutX="14.0" layoutY="9.0" prefHeight="40.0" prefWidth="576.0" text="Label" textAlignment="CENTER">
+         <font>
+            <Font size="28.0" />
+         </font></Label>
+   </children>
+</AnchorPane>
