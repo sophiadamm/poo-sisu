@@ -10,6 +10,7 @@ from PyQt5 import QtWidgets, uic
 from PyQt5.QtWidgets import QApplication, QMainWindow, QTabWidget, QPushButton, QWidget
 from histogramawidget import HistogramaWidget
 from aumento_nota_cont import AumentoNotaController
+from simulacao_sisu import SimulacaoSisuController
 
 class JanelaInicial(QMainWindow):
     def __init__(self):
@@ -212,6 +213,11 @@ class JanelaInicial(QMainWindow):
 
     def abrirF7(self):
         print("Abriu botao 7")
+        widget = SimulacaoSisuController()
+        title = "Simulacao Sisu"
+        self.ui.tabWidget.addTab(widget, title)
+        self.ui.tabWidget.setCurrentWidget(widget)
+        widget.setDados(self.filtrar_dados())
         pass
 
     def abrirF8(self):
