@@ -9,6 +9,7 @@ from dados import Dados
 from PyQt5 import QtWidgets, uic
 from PyQt5.QtWidgets import QApplication, QMainWindow, QTabWidget, QPushButton, QWidget
 from histogramawidget import HistogramaWidget
+from aumento_nota_cont import AumentoNotaController
 
 class JanelaInicial(QMainWindow):
     def __init__(self):
@@ -202,6 +203,11 @@ class JanelaInicial(QMainWindow):
 
     def abrirF6(self):
         print("Abriu botao 6")
+        widget = AumentoNotaController()
+        title = "Comp Nota"
+        self.ui.tabWidget.addTab(widget, title)
+        self.ui.tabWidget.setCurrentWidget(widget)
+        widget.setDados(self.filtrar_dados(), self.ui.filtroDemanda.currentText())
         pass
 
     def abrirF7(self):
