@@ -1,6 +1,9 @@
 import sys
+import os
 from PyQt5 import QtWidgets
+from PyQt5.QtWidgets import QApplication, QMainWindow, QTabWidget, QPushButton, QWidget
 from PyQt5.QtWidgets import QApplication, QMainWindow
+from PyQt5.QtChart import QChart, QChartView, QLineSeries
 from visual.ui_janelaprincipal import Ui_MainWindow
 from dados import Dados
 
@@ -18,6 +21,7 @@ class App(QMainWindow):
         self.setMinimumSize(600, 600)
         self.resize(600, 600)  # Define o tamanho inicial da janela
         self.show()
+
 
 # Para iniciar a aplicação
 if __name__ == "__main__":
