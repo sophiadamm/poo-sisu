@@ -1,8 +1,9 @@
 import sys
-import os
+from typing import List
 from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QApplication, QMainWindow
+from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget
 from visual.ui_janelaprincipal import Ui_MainWindow
+from graficopizza import PizzaDemandaWidget
 from dados import Dados
 from PyQt5 import QtWidgets, uic
 from PyQt5.QtWidgets import QApplication, QMainWindow, QTabWidget, QPushButton, QWidget
@@ -21,11 +22,14 @@ class JanelaInicial(QMainWindow):
         self.setWindowTitle("Análise dos dados do Sisu")
         self.setMinimumSize(600, 600)
         self.resize(600, 600) 
+
+
         self.show()
         self.initialize()
 
     def initialize(self):
         self.dados_sisu = Dados.get_instancia().get_lista_candidatos()
+        self.ui.tabWidget.setTabsClosable(True)
         self.ui.botao10.setDisabled(False)
         self.ui.botao3.setDisabled(False)
         self.ui.botao1.setDisabled(True)
@@ -81,6 +85,7 @@ class JanelaInicial(QMainWindow):
         self.ui.filtroCampus.currentIndexChanged.connect(self.atualizar)
         self.ui.filtroDemanda.currentIndexChanged.connect(self.atualizar)
         self.ui.filtroCurso.currentIndexChanged.connect(self.atualizar)
+        self.ui.tabWidget.tabCloseRequested.connect(self.fechar_aba)
 
     def atualizar(self):
         cursoSelecionado = self.ui.filtroCurso.currentText()
@@ -103,7 +108,26 @@ class JanelaInicial(QMainWindow):
         self.ui.botao7.setDisabled(not validaDemanda or not validaCurso or not validaCampus or not validaAno)
 
         self.ui.botao8.setDisabled(not validaAno or not validaDemanda or validaCurso)
-        self.ui.botao9.setDisabled(not validaAno and validaDemanda)
+        self.ui.botao9.setDisabled(not validaAno or validaDemanda)
+
+    def filtrosSelecionados(self) -> List[str]:
+        cursoSelecionado = self.ui.filtroCurso.currentText()
+        anoSelecionado = self.ui.filtroAno.currentText()
+        campusSelecionado = self.ui.filtroCampus.currentText()
+        demandaSelecionada = self.ui.filtroDemanda.currentText()
+
+        filtros: List[str] = []
+
+        if cursoSelecionado != "Curso":
+            filtros.append(cursoSelecionado)
+        if demandaSelecionada != "Demanda":
+            filtros.append(demandaSelecionada)
+        if anoSelecionado != "Ano":
+            filtros.append(anoSelecionado)
+        if campusSelecionado != "Campus":
+            filtros.append(campusSelecionado)
+
+        return filtros
 
     def filtrar_dados(self):
         dados_filtrados = []
@@ -184,11 +208,24 @@ class JanelaInicial(QMainWindow):
 
     def abrirF9(self):
         print("Abriu botao 9")
+        widget = PizzaDemandaWidget()
+        title = "Percentual Demanda"
+        self.ui.tabWidget.addTab(widget, title)
+        self.ui.tabWidget.setCurrentWidget(widget)
+
+        widget.setDados(self.dados_sisu, self.filtrosSelecionados(), self.demandas)
         pass
 
     def abrirF10(self):
         print("Abriu botao 10")
         pass
+
+    def fechar_aba(self, index: int):
+        if index == 0:
+            return
+        widget = self.ui.tabWidget.widget(index)
+        self.ui.tabWidget.removeTab(index)
+        widget.deleteLater()
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
