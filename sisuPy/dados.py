@@ -1,7 +1,6 @@
 import os
 from typing import List
 from candidato import Candidato
-import importlib.resources as pkg_resources
 
 class Dados:
     __instancia = None
@@ -14,6 +13,7 @@ class Dados:
         caminho_arquivo = os.path.join("resources", "sisuDados.csv")
         try:
             with open(caminho_arquivo, 'r', encoding='utf-8') as f:
+                next(f)
                 for linha in f:
                         partes = linha.strip().split(",")
                         candidato = Candidato(partes)

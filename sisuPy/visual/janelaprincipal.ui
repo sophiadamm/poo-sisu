@@ -115,9 +115,21 @@ Para ver restrições e mais detalhes sobre a aplicação, clique no botão ao l
              <layout class="QHBoxLayout" name="horizontalLayout">
               <item>
                <widget class="QPushButton" name="limparAno">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>25</width>
+                  <height>25</height>
+                 </size>
+                </property>
                 <property name="maximumSize">
                  <size>
-                  <width>24</width>
+                  <width>25</width>
                   <height>25</height>
                  </size>
                 </property>
@@ -273,6 +285,31 @@ Para ver restrições e mais detalhes sobre a aplicação, clique no botão ao l
             <widget class="QWidget" name="widget_7" native="true">
              <layout class="QHBoxLayout" name="horizontalLayout_5">
               <item>
+               <widget class="QPushButton" name="limparCurso">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>25</width>
+                  <height>25</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>25</width>
+                  <height>25</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>x</string>
+                </property>
+               </widget>
+              </item>
+              <item>
                <widget class="QComboBox" name="filtroCurso">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
@@ -374,7 +411,7 @@ entre dois anos</string>
             </widget>
            </item>
            <item row="1" column="1">
-            <widget class="QPushButton" name="votao7">
+            <widget class="QPushButton" name="botao7">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
                <horstretch>0</horstretch>
