@@ -61,6 +61,7 @@ public class JanelainicialController implements Initializable {
     @FXML private Button Lano;
     @FXML private Button Lcampus;
     @FXML private Button Ldemanda;
+    @FXML private Button Lcurso;
     
     @FXML private TabPane tabPane;
     @FXML private Tab tabPrincipal;
@@ -141,10 +142,10 @@ public class JanelainicialController implements Initializable {
         boolean validaDemanda = (demandaSelecionada != null);
         boolean validaCurso = (cursoSelecionado != null && cursos.contains(cursoSelecionado));
 
-        botao1.setDisable(!validaCurso);
-        botao2.setDisable(!validaCampus);
+        botao1.setDisable(!validaCurso || !validaDemanda || validaAno);
+        botao2.setDisable(!validaCurso || validaAno || validaDemanda || validaCampus);
 
-        botao4.setDisable(!validaAno);
+        botao4.setDisable(!validaAno || validaCurso);
         botao5.setDisable(!validaAno);
         
         botao6.setDisable(!validaDemanda || validaAno);
@@ -238,7 +239,8 @@ public class JanelainicialController implements Initializable {
 
             Utilidade1Controller controllerF1 = loader.getController();
             String cursoSelecionado = filtroCurso.getSelectionModel().getSelectedItem();
-            controllerF1.setDados(filtrarDados(), cursoSelecionado);
+            String demandaSelecionada = filtroDemanda.getSelectionModel().getSelectedItem();
+            controllerF1.setDados(filtrarDados(), cursoSelecionado, demandaSelecionada);
         }catch (IOException e) {
             e.printStackTrace();
         }
@@ -259,9 +261,9 @@ public class JanelainicialController implements Initializable {
             tabPane.getTabs().add(novaAba);
             tabPane.getSelectionModel().select(novaAba);
 
-            Utilidade1Controller controllerF1 = loader.getController();
+            GraficoNotasController controllerF2 = loader.getController();
             String cursoSelecionado = filtroCurso.getSelectionModel().getSelectedItem();
-            controllerF1.setDados(filtrarDados(), cursoSelecionado);
+            controllerF2.setDados(filtrarDados(), cursoSelecionado);
         }catch (IOException e) {
             e.printStackTrace();
         }
@@ -460,6 +462,11 @@ public class JanelainicialController implements Initializable {
         atualizar();
     }
     
+    @FXML
+    void limparCurso(ActionEvent event) {
+        filtroCurso.getSelectionModel().clearSelection();
+        atualizar();
+    }
 
 
 }

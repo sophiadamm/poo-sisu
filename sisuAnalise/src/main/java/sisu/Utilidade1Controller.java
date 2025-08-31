@@ -38,11 +38,13 @@ public class Utilidade1Controller implements Initializable {
     private List<Candidato> dados;
     
     private String cursosel;
+    private String demandasel;
     
-    public void setDados(ArrayList<Candidato> dados, String curso){
+    public void setDados(ArrayList<Candidato> dados, String curso, String demanda){
         this.dados = dados;
         this.cursosel = curso;
-        grafico(curso);
+        this.demandasel = demanda;
+        grafico();
     }
     
         @Override
@@ -50,7 +52,7 @@ public class Utilidade1Controller implements Initializable {
         // TODO
     }
     
-    public void grafico(String curso){
+    public void grafico(){
         Map<String, Map<Integer, Double>> dadosAgrupados = new HashMap<>();
         
         for(Candidato c : dados) {
@@ -87,8 +89,8 @@ public class Utilidade1Controller implements Initializable {
         eixoY.setUpperBound(1000);
         eixoY.setTickUnit(100);
         
-        curso = curso.toLowerCase();
-        lineChart.setTitle("Gráfico da evolução das notas do de corte de " + curso + " em cada campus disponivel");
+        cursosel = cursosel.toLowerCase();
+        lineChart.setTitle("Gráfico da Evolução das Notas de Corte de " + cursosel + " na Demanda " + demandasel + " em Cada Campus Disponível");
         
         for(String campus : dadosAgrupados.keySet()){
             XYChart.Series<Number, Number> serie = new XYChart.Series<>();
