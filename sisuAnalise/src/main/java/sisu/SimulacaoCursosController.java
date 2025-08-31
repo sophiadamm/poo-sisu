@@ -15,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -34,6 +35,8 @@ public class SimulacaoCursosController implements Initializable {
     private ListView<String> listaCursos;
     @FXML
     private TextArea mensagem;
+    @FXML
+    private Label label_filtros;
     
     private ArrayList<Candidato> dados;
     
@@ -47,7 +50,7 @@ public class SimulacaoCursosController implements Initializable {
     void BuscaCursos(ActionEvent event) {
         Double nota = null;
         try {
-            nota = Double.parseDouble(txtnota.getText());
+            nota = Double.parseDouble(txtnota.getText().replace(",", "."));
         } catch (NumberFormatException e) {
             System.err.println("Erro: Formato de número inválido.");
             Alert alert = new Alert(AlertType.ERROR);
@@ -86,9 +89,12 @@ public class SimulacaoCursosController implements Initializable {
         
     }
 
-    public void setDados(ArrayList<Candidato> dados) {
+    public void setDados(ArrayList<Candidato> dados, List<String> filtros) {
         this.dados = dados;   
         this.notasCorte = CalculadoraNotaCorte.calcularNotaCorte(dados, false);
+        String filtrosFormatados = String.join(", ", filtros);
+        label_filtros.setText("Filtros Aplicados: " + filtrosFormatados);
+        mensagem.setText("Adicione sua nota e verifique em que cursos você passaria!");
     }
     
 }

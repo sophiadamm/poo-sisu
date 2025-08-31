@@ -31,6 +31,8 @@ public class ListaTop10Controller implements Initializable {
     
     @FXML
     private Label TituloLista;
+    @FXML
+    private Label label_filtros;
     
     private ArrayList<Candidato> dados;
     private int anoSelecionado;
@@ -40,9 +42,11 @@ public class ListaTop10Controller implements Initializable {
         
     } 
     
-    public void setDados(ArrayList<Candidato> dados, int ano){
+    public void setDados(ArrayList<Candidato> dados, int ano,  List<String> filtros){
         this.dados = dados;
         this.anoSelecionado = ano;
+        String filtrosFormatados = String.join(", ", filtros);
+        label_filtros.setText("Filtros Aplicados: " + filtrosFormatados);
         processarEExibirDados();
     }
     
