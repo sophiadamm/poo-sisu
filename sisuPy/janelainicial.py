@@ -11,6 +11,7 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QTabWidget, QPushButton, 
 from histogramawidget import HistogramaWidget
 from aumento_nota_cont import AumentoNotaController
 from simulacao_sisu import SimulacaoSisuController
+from simulacao_cursos import SimulacaoCursosController
 
 class JanelaInicial(QMainWindow):
     def __init__(self):
@@ -109,9 +110,9 @@ class JanelaInicial(QMainWindow):
         self.ui.botao5.setDisabled(not validaAno)
         
         self.ui.botao6.setDisabled(not validaDemanda or validaAno)
-        self.ui.botao7.setDisabled(not validaDemanda or not validaCurso or not validaCampus or not validaAno)
+        self.ui.botao7.setDisabled(not validaAno or not validaDemanda or validaCurso)
 
-        self.ui.botao8.setDisabled(not validaAno or not validaDemanda or validaCurso)
+        self.ui.botao8.setDisabled(not validaDemanda or not validaCurso or not validaCampus or not validaAno)
         self.ui.botao9.setDisabled(not validaAno or validaDemanda)
 
     def filtrosSelecionados(self) -> List[str]:
@@ -213,15 +214,23 @@ class JanelaInicial(QMainWindow):
 
     def abrirF7(self):
         print("Abriu botao 7")
+        widget = SimulacaoCursosController()
+        title = "Simulacao Cursos"
+        self.ui.tabWidget.addTab(widget, title)
+        self.ui.tabWidget.setCurrentWidget(widget)
+
+        campusSelecionado = self.ui.filtroCampus.currentText()
+        validaCampus = ( campusSelecionado != "Campus")
+        widget.setDados(self.filtrar_dados(), self.filtrosSelecionados(), validaCampus)
+        pass
+
+    def abrirF8(self):
+        print("Abriu botao 8")
         widget = SimulacaoSisuController()
         title = "Simulacao Sisu"
         self.ui.tabWidget.addTab(widget, title)
         self.ui.tabWidget.setCurrentWidget(widget)
         widget.setDados(self.filtrar_dados())
-        pass
-
-    def abrirF8(self):
-        print("Abriu botao 8")
         pass
 
     def abrirF9(self):
