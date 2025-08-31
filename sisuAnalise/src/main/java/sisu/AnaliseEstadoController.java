@@ -13,11 +13,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Collections;
+import java.util.*;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.Label;
 
@@ -41,6 +37,8 @@ public class AnaliseEstadoController implements Initializable {
     private TableColumn<DadosEstado, Double> porcentagem;
     @FXML
     private Label titulo;
+    @FXML
+    private Label label_filtros;
     
     private ArrayList<Candidato> dados;
     private int total;
@@ -51,9 +49,11 @@ public class AnaliseEstadoController implements Initializable {
         public double somaMedias = 0.0;
     }  
     
-    public void setDados(ArrayList<Candidato> dados, int ano){
+    public void setDados(ArrayList<Candidato> dados, int ano,  List<String> filtros){
         this.dados = dados;
         this.ano = ano;
+        String filtrosFormatados = String.join(", ", filtros);
+        label_filtros.setText("Filtros Aplicados: " + filtrosFormatados);
         gerarTabela();
     }
     

@@ -31,7 +31,9 @@ public class Candidato{
                "Colocação: " + this.colocacao + "\n" +
                "Média: " + this.media + "\n"+
                "Estado: " + this.estado + "\n" +
-               "Demanda: " + this.demanda + "\n";
+               "Demanda: " + this.demanda + "\n" +
+               "Ano: " + this.ano + "\n"+
+                "-------------------------------\n\n";
     }
     
      public String tratamentoCurso(String s) {

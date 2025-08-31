@@ -15,14 +15,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 
-/**
- * FXML Controller class
- *
- * @author sophi
- */
 public class JanelainicialController implements Initializable {
 
     @FXML
@@ -54,8 +47,6 @@ public class JanelainicialController implements Initializable {
     @FXML
     private Button botao10;
     @FXML
-    private TextArea txtInfo;
-    @FXML
     private Button botaoAjuda;
  
     @FXML private Button Lano;
@@ -68,8 +59,7 @@ public class JanelainicialController implements Initializable {
  
     private ArrayList<Candidato> dadosSisu;
     private Set<String> campus, demandas, cursos;
-    
-    private boolean mark = false;
+
    
     private void preencherFiltros(){
         List<String> anos = Arrays.asList("2019", "2020", "2021", "2022", "2023", "2024", "2025");
@@ -89,9 +79,12 @@ public class JanelainicialController implements Initializable {
             filtroDemanda.getItems().addAll(demandas);
             filtroCampus.getItems().addAll(campus);
             filtroCurso.getItems().addAll(cursos);
-
+            
+            filtroDemanda.getItems().add("Demanda");
+            filtroCampus.getItems().add("Campus");
+            filtroCurso.getItems().add("Curso");
+            filtroAno.getItems().add("Ano");
         }
-        
     }
     
     private ArrayList<Candidato> filtrarDados() {
@@ -103,10 +96,10 @@ public class JanelainicialController implements Initializable {
         ArrayList<Candidato> dadosFiltrados = new ArrayList<>();
 
         for (Candidato candidato : dadosSisu) {
-            boolean validaAno = (anoSelecionado == null || String.valueOf(candidato.getAno()).equals(anoSelecionado));
-            boolean validaCurso = (cursoSelecionado == null || candidato.getCurso().equals(cursoSelecionado));
-            boolean validaCampus = (campusSelecionado == null || candidato.getCampus().equals(campusSelecionado));
-            boolean validaDemanda = (demandaSelecionada == null || candidato.getDemanda().equals(demandaSelecionada));
+            boolean validaAno = (anoSelecionado == null || anoSelecionado.equals("Ano") || String.valueOf(candidato.getAno()).equals(anoSelecionado));
+            boolean validaCurso = (cursoSelecionado == null || cursoSelecionado.equals("Curso")|| candidato.getCurso().equals(cursoSelecionado));
+            boolean validaCampus = (campusSelecionado == null || campusSelecionado.equals("Campus") || candidato.getCampus().equals(campusSelecionado));
+            boolean validaDemanda = (demandaSelecionada == null || demandaSelecionada.equals("Demanda") || candidato.getDemanda().equals(demandaSelecionada));
 
             if (validaAno && validaCurso && validaCampus && validaDemanda) {
                 dadosFiltrados.add(candidato);
@@ -137,51 +130,28 @@ public class JanelainicialController implements Initializable {
         String demandaSelecionada = filtroDemanda.getSelectionModel().getSelectedItem();
         String campusSelecionado = filtroCampus.getSelectionModel().getSelectedItem();
         
-        boolean validaAno = (anoSelecionado != null);
-        boolean validaCampus = ( campusSelecionado != null);
-        boolean validaDemanda = (demandaSelecionada != null);
-        boolean validaCurso = (cursoSelecionado != null && cursos.contains(cursoSelecionado));
+        boolean validaAno = (anoSelecionado != null && !anoSelecionado.equals("Ano"));
+        boolean validaCampus = ( campusSelecionado != null && !campusSelecionado.equals("Campus"));
+        boolean validaDemanda = (demandaSelecionada != null && !demandaSelecionada.equals("Demanda"));
+        boolean validaCurso = (cursoSelecionado != null && !cursoSelecionado.equals("Curso"));
 
         botao1.setDisable(!validaCurso || !validaDemanda || validaAno);
-        botao2.setDisable(!validaCurso || validaAno || validaDemanda || validaCampus);
+        botao2.setDisable(!validaCurso || validaAno || !validaDemanda || !validaCampus);
 
-        botao4.setDisable(!validaAno || validaCurso);
-        botao5.setDisable(!validaAno);
+        botao4.setDisable(!validaAno || validaCurso || !validaDemanda);
+        botao5.setDisable(!validaAno || anoSelecionado.equals("2025"));
         
-        botao6.setDisable(!validaDemanda || validaAno);
-        botao7.setDisable(!validaDemanda || !validaCurso || !validaCampus || !validaAno);
-
-        botao8.setDisable(!validaAno || !validaDemanda);
+        botao6.setDisable(!validaDemanda || validaAno || validaCurso);
+        botao7.setDisable(!validaAno || !validaDemanda || validaCurso);
+        
+        botao8.setDisable(!validaDemanda || !validaCurso || !validaCampus || !validaAno);
         botao9.setDisable(!validaAno || validaDemanda);
     }
-    
     private void adiocionarListeners(){
-    
         filtroAno.valueProperty().addListener((obs, oldVal, newVal) ->  atualizar());
         filtroCampus.valueProperty().addListener((obs, oldVal, newVal) -> atualizar());
         filtroDemanda.valueProperty().addListener((obs, oldVal, newVal) ->  atualizar());
-        filtroCurso.valueProperty().addListener((obs, oldVal, newVal) -> {
-                        atualizar();
-                        mark = true;
-                        });
-        
-        filtroCurso.getEditor().textProperty().addListener((obs, oldV, newV) -> {
-            if(mark == true){
-                mark = false;
-                return;
-            }
-            filtroCurso.show();
-            String txt = (newV == null ? "" : newV).toLowerCase();
-            if (txt.isEmpty()) {
-                filtroCurso.getItems().setAll(cursos);
-            } else {
-                Set<String> filtrado = new TreeSet<>();
-                for(String c : cursos){
-                    if(c.toLowerCase().contains(txt)) filtrado.add(c);
-                }
-                filtroCurso.getItems().setAll(filtrado);
-            }
-        });
+        filtroCurso.valueProperty().addListener((obs, oldVal, newVal) -> atualizar());
     }
     
     @Override
@@ -194,11 +164,12 @@ public class JanelainicialController implements Initializable {
     } 
     
     private boolean verificarLista(){
-        if (filtrarDados() == null || filtrarDados().isEmpty()) { 
+        ArrayList<Candidato> tmp = filtrarDados();
+        if (tmp == null || tmp.isEmpty()) { 
             Alert a = new Alert(Alert.AlertType.ERROR); 
-            a.setTitle("Dados insuficientes"); 
+            a.setTitle("Nenhum Aprovado Encontrado"); 
             a.setHeaderText("Lista de aprovados vazia"); 
-            a.setContentText("Não há dados de aprovados carregados."); 
+            a.setContentText("Não foi possível encontrar aprovados com os filtros atuais. Redefina seus critérios de busca e tente novamente."); 
             a.showAndWait(); 
             return false; 
         }
@@ -311,7 +282,7 @@ public class JanelainicialController implements Initializable {
             if(anoString != null && !anoString.isEmpty()){
                 anoSelecionado = Integer.parseInt(anoString);
             }
-            controllerF4.setDados(filtrarDados(), anoSelecionado);
+            controllerF4.setDados(filtrarDados(), anoSelecionado, filtrosSelecionados());
         }catch (IOException e) {
             e.printStackTrace();
         }
@@ -337,7 +308,7 @@ public class JanelainicialController implements Initializable {
             if(anoString != null && !anoString.isEmpty()){
                 anoSelecionado = Integer.parseInt(anoString);
             }
-            controllerF5.setDados(filtrarDados(), anoSelecionado);
+            controllerF5.setDados(filtrarDados(), anoSelecionado, filtrosSelecionados());
         }catch (IOException e) {
             e.printStackTrace();
         }
@@ -355,7 +326,7 @@ public class JanelainicialController implements Initializable {
             tabPane.getSelectionModel().select(novaAba);
 
             AumentoNotaController controllerF6 = loader.getController();
-            controllerF6.setDados(filtrarDados());
+            controllerF6.setDados(filtrarDados(), filtrosSelecionados());
             
         } catch (IOException e) {
             e.printStackTrace();
@@ -364,25 +335,6 @@ public class JanelainicialController implements Initializable {
 
     @FXML
     private void abrirF7(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("simulacaoEspecifica.fxml")); 
-            AnchorPane abaContent = loader.load();
-
-            Tab novaAba = new Tab("Simulacao Especifica");
-            novaAba.setContent(abaContent);
-            tabPane.getTabs().add(novaAba);
-            tabPane.getSelectionModel().select(novaAba);
-
-            SimulacaoEspecificaController controllerF7 = loader.getController();
-            controllerF7.setDados(filtrarDados());
-            
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
-    private void abrirF8(ActionEvent event) {
         if(!verificarLista()){
             return;
         }
@@ -395,8 +347,27 @@ public class JanelainicialController implements Initializable {
             tabPane.getTabs().add(novaAba);
             tabPane.getSelectionModel().select(novaAba);
 
-            SimulacaoCursosController controllerF8 = loader.getController();
+            SimulacaoCursosController controllerF7 = loader.getController();
+            controllerF7.setDados(filtrarDados(), filtrosSelecionados());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+        @FXML
+    private void abrirF8(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("simulacaoEspecifica.fxml")); 
+            AnchorPane abaContent = loader.load();
+
+            Tab novaAba = new Tab("Simulacao Especifica");
+            novaAba.setContent(abaContent);
+            tabPane.getTabs().add(novaAba);
+            tabPane.getSelectionModel().select(novaAba);
+
+            SimulacaoEspecificaController controllerF8 = loader.getController();
             controllerF8.setDados(filtrarDados());
+            
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -446,27 +417,25 @@ public class JanelainicialController implements Initializable {
     
     @FXML
     void limparAno(ActionEvent event) {
-        filtroAno.getSelectionModel().clearSelection();
+        filtroAno.setValue("Ano");
         atualizar();
     }
 
     @FXML
     void limparCampus(ActionEvent event) {
-        filtroCampus.getSelectionModel().clearSelection();
+        filtroCampus.setValue("Campus");
         atualizar();
     }
 
     @FXML
     void limparDemanda(ActionEvent event) {
-        filtroDemanda.getSelectionModel().clearSelection();
+        filtroDemanda.setValue("Demanda");
         atualizar();
     }
     
     @FXML
     void limparCurso(ActionEvent event) {
-        filtroCurso.getSelectionModel().clearSelection();
+        filtroCurso.setValue("Curso");
         atualizar();
     }
-
-
 }

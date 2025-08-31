@@ -39,6 +39,9 @@ public class HistogramaController implements Initializable {
         if (filtros != null && !filtros.isEmpty()) {
             ObservableList<String> filtrosObservable = FXCollections.observableArrayList(filtros);
             filtrosSelecionados.setItems(filtrosObservable);
+        }else{
+            ObservableList<String> mensagemVazia = FXCollections.observableArrayList("Nenhum filtro foi selecionado.");
+            filtrosSelecionados.setItems(mensagemVazia);
         }
 
         if (this.dados != null && !this.dados.isEmpty()) {

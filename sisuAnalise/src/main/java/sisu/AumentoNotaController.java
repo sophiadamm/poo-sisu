@@ -11,12 +11,10 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.SimpleDoubleProperty;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -48,6 +46,9 @@ public class AumentoNotaController implements Initializable {
     private Button botaoResultado;
     
     private ArrayList<Candidato> dados;
+    
+    @FXML
+    private Label label_filtros;
     
     private String anoISelecionado, anoFSelecionado;
 
@@ -84,8 +85,11 @@ public class AumentoNotaController implements Initializable {
     }
     
   
-    public void setDados(ArrayList<Candidato> dados) {
-       this.dados = dados;
+    public void setDados(ArrayList<Candidato> dados, List<String> filtros) {
+       this.dados = dados; 
+       String filtrosFormatados = String.join(", ", filtros);
+       label_filtros.setText("Filtros Aplicados: " + filtrosFormatados);
+       
     }
      
     @FXML
@@ -112,6 +116,15 @@ public class AumentoNotaController implements Initializable {
             double notaF = notasCorteF.get(curso);
             dadosTabela.add(new CursoAumento(curso, notaI, notaF));
         }
+        
+        if (dadosTabela.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Nenhum Curso em Comum");
+            alert.setHeaderText("Nenhum dado encontrado.");
+            alert.setContentText("Não há cursos em comum entre os anos selecionados. Por favor, escolha outros anos ou redefina os filtros.");
+            alert.showAndWait();
+        }
+        
         tabela.setItems(dadosTabela);
     }
 
