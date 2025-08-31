@@ -14,6 +14,7 @@ from simulacao_sisu import SimulacaoSisuController
 from simulacao_cursos import SimulacaoCursosController
 from consultanome import ConsultaNomeController
 from graficobarra import GraficoBarra
+from graficolinha import graficolinhaWidget
 
 class JanelaInicial(QMainWindow):
     def __init__(self):
@@ -172,17 +173,11 @@ class JanelaInicial(QMainWindow):
         self.atualizar()
 
     def abrirF1(self):
-        nova_aba = QWidget()
-
-        caminho_base = os.path.dirname(__file__)
-        caminho_ui = os.path.join(caminho_base, "visual", "Grafico1.ui")
-
-        uic.loadUi(caminho_ui, nova_aba)
-        
-        self.ui.tabWidget.addTab(nova_aba, "Gráfico de Linhas")
-        
-        self.ui.tabWidget.setCurrentWidget(nova_aba)
         print("Abriu botao 1")
+        widget = graficolinhaWidget()
+        self.ui.tabWidget.addTab(widget, "Gráfico Linha")
+        self.ui.tabWidget.setCurrentWidget(widget)
+        widget.setDados(self.filtrar_dados(), self.filtrosSelecionados())
         pass
 
     def abrirF2(self):
