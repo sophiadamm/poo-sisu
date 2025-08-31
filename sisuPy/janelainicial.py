@@ -12,6 +12,7 @@ from histogramawidget import HistogramaWidget
 from aumento_nota_cont import AumentoNotaController
 from simulacao_sisu import SimulacaoSisuController
 from simulacao_cursos import SimulacaoCursosController
+from consultanome import ConsultaNomeController
 
 class JanelaInicial(QMainWindow):
     def __init__(self):
@@ -245,6 +246,12 @@ class JanelaInicial(QMainWindow):
 
     def abrirF10(self):
         print("Abriu botao 10")
+        widget = ConsultaNomeController()
+        title = "Consulta Nome"
+        self.ui.tabWidget.addTab(widget, title)
+        self.ui.tabWidget.setCurrentWidget(widget)
+
+        widget.setDados(self.filtrar_dados(), self.filtrosSelecionados())
         pass
 
     def fechar_aba(self, index: int):

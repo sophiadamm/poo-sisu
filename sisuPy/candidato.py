@@ -104,14 +104,15 @@ class Candidato:
     def __str__(self) -> str: #equivalente ao toString
         return (
             f"Numero Enem: {self.__numero_enem}\n"
-            f"__nome: {self.__nome}\n"
-            f"__curso: {self.__curso}\n"
-            f"__campus: {self.__campus}\n"
+            f"Nome: {self.__nome}\n"
+            f"Curso: {self.__curso}\n"
+            f"Campus: {self.__campus}\n"
             f"Colocação: {self.__colocacao}\n"
             f"Média: {self.__media}\n"
-            f"__estado: {self.__estado}\n"
-            f"__demanda: {self.__demanda}\n"
-            f"__ano: {self.__ano}\n"
+            f"Estado: {self.__estado}\n"
+            f"Demanda: {self.__demanda}\n"
+            f"Ano: {self.__ano}\n"
+            f"----------------------\n"
         )
     
     # getters -> mantem o dado seguro de modificações, mas com simplicidade de acessar com o @property
