@@ -118,36 +118,36 @@ class Candidato:
     # objeto.atributo da pra ler, n da pra mudar.
     @property
     def numero_enem(self) -> str:
-        return self._numero_enem
+        return self.__numero_enem
 
     @property
     def nome(self) -> str:
-        return self._nome
+        return self.__nome
 
     @property
     def curso(self) -> str:
-        return self._curso
+        return self.__curso
 
     @property
     def campus(self) -> str:
-        return self._campus
+        return self.__campus
 
     @property
     def demanda(self) -> str:
-        return self._demanda
+        return self.__demanda
 
     @property
     def estado(self) -> str:
-        return self._estado
+        return self.__estado
 
     @property
     def colocacao(self) -> str:
-        return self._colocacao
+        return self.__colocacao
 
     @property
     def media(self) -> float:
-        return self._media
+        return self.__media
 
     @property
     def ano(self) -> int:
-        return self._ano
+        return self.__ano
