@@ -1,4 +1,4 @@
-from typing import List, Optional, Any
+from typing import List
 from PyQt5.QtWidgets import QWidget, QMessageBox
 from PyQt5.QtCore import Qt
 from visual.ui_simulacaoCursos import Ui_Form  
