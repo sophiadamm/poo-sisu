@@ -19,7 +19,25 @@ class graficoWidget():
         self.widget_grafico = self.findChild(QWidget, 'widgetGrafico')
         
         # Chama a função para gerar o gráfico
-        self.gerar_grafico(curso_selecionado)
+        self.gerar_grafico(curso_selecionado, dados)
 
-    def gerar_grafico(self, curso):
-        
+    def gerar_grafico(self, curso, dados):
+        dados_agrupados = {}
+
+        for candidato in dados:
+            campus = candidato.campus()
+            ano = candidato.ano()
+            media = candidato.media()
+
+            if campus not in dados_agrupados:
+                dados_agrupados[campus] = {}
+            nota_de_corte = dados_agrupados[campus]
+
+            if ano not in nota_de_corte:
+                nota_de_corte[ano] = media
+            else:
+                if media < nota_de_corte[ano]:
+                    nota_de_corte[ano] = media
+
+
+
