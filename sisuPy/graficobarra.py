@@ -7,19 +7,23 @@ from PyQt5 import QtGui
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPainter
 from PyQt5.QtWidgets import QWidget
+from candidato import Candidato
 
 class GraficoBarra(QWidget):
     def __init__(self):
         super().__init__()
         self.resize(1000, 600)
-        self.widget = QtWidgets.QWidget(self)
-        self.widget.setStyleSheet('background-color: linegreen')
-        self.vertical_layout = QtWidgets.QVBoxLayout(self.widget)
+        # self.widget = QtWidgets.QWidget(self)
+        # self.widget.setStyleSheet('background-color: linegreen')
+        # self.vertical_layout = QtWidgets.QVBoxLayout(self.widget)
+
+        self.setStyleSheet('background-color: lightgreen')  
+        self.vertical_layout = QtWidgets.QVBoxLayout(self) 
         self.set0 = QtChart.QBarSet('menor_nota')
         self.set1 = QtChart.QBarSet('valor_medio')
         self.set2 = QtChart.QBarSet('maior_nota')
 
-    def setDados(self, dados: List):
+    def setDados(self, dados: List[Candidato]):
         self.dados = dados
         maior_nota = {}
         menor_nota = {}
@@ -28,12 +32,12 @@ class GraficoBarra(QWidget):
         contagem_candidatos = {}
 
         for c in dados:
-            ano = c.ano()
-            media = c.media()
+            ano = c.ano
+            media = c.media
             if ano not in maior_nota or media > maior_nota[ano]:
                 maior_nota[ano] = media
             
-            if ano not in menor_nota or media < menor_nota:
+            if ano not in menor_nota or media < menor_nota[ano]:
                 menor_nota[ano] = media
             
             soma_notas[ano] = soma_notas.get(ano, 0.0) + media
