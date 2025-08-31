@@ -13,9 +13,6 @@ from PyQt5.QtGui import QCursor
 class PizzaDemandaWidget(QWidget):
     def __init__(self):
         super().__init__()
-        self.initialize()
-
-    def initialize(self):
         self._layout = QVBoxLayout(self)
         self.chart_view = QChartView()
         self.chart_view.setRenderHint(QPainter.Antialiasing)

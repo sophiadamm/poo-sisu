@@ -1,4 +1,5 @@
 import sys
+import os
 from typing import List
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget
@@ -7,6 +8,7 @@ from graficopizza import PizzaDemandaWidget
 from dados import Dados
 from PyQt5 import QtWidgets, uic
 from PyQt5.QtWidgets import QApplication, QMainWindow, QTabWidget, QPushButton, QWidget
+from histogramawidget import HistogramaWidget
 
 class JanelaInicial(QMainWindow):
     def __init__(self):
@@ -184,6 +186,10 @@ class JanelaInicial(QMainWindow):
 
     def abrirF3(self):
         print("Abriu botao 3")
+        widget = HistogramaWidget()
+        self.ui.tabWidget.addTab(widget, "Histograma de Notas")
+        self.ui.tabWidget.setCurrentWidget(widget)
+        widget.setDados(self.filtrar_dados(), self.filtrosSelecionados())
         pass
 
     def abrirF4(self):
@@ -213,7 +219,7 @@ class JanelaInicial(QMainWindow):
         self.ui.tabWidget.addTab(widget, title)
         self.ui.tabWidget.setCurrentWidget(widget)
 
-        widget.setDados(self.dados_sisu, self.filtrosSelecionados(), self.demandas)
+        widget.setDados(self.filtrar_dados(), self.filtrosSelecionados(), self.demandas)
         pass
 
     def abrirF10(self):
