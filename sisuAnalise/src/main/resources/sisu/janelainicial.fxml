@@ -3,10 +3,9 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -30,6 +29,7 @@
                     <rowConstraints>
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints />
                     </rowConstraints>
                      <children>
                         <BorderPane prefHeight="200.0" prefWidth="200.0">
@@ -101,7 +101,10 @@
                               </Button>
                            </left>
                            <center>
-                              <ComboBox fx:id="filtroCurso" editable="true" maxWidth="1.7976931348623157E308" prefHeight="26.0" promptText="Curso" BorderPane.alignment="CENTER" />
+                              <ComboBox fx:id="filtroCurso" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="500.0" promptText="Curso" BorderPane.alignment="CENTER">
+                                 <BorderPane.margin>
+                                    <Insets right="10.0" />
+                                 </BorderPane.margin></ComboBox>
                            </center>
                         </BorderPane>
                      </children>
@@ -119,26 +122,17 @@
                       <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Button fx:id="botao1" contentDisplay="BOTTOM" disable="true" graphicTextGap="3.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#abrirF1" prefHeight="90.0" prefWidth="126.0" text="Gráfico de Linhas Nota de Corte">
-                           <graphic>
-                              <ImageView fitHeight="51.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" />
-                           </graphic>
+                        <Button fx:id="botao1" contentDisplay="BOTTOM" disable="true" graphicTextGap="3.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#abrirF1" prefHeight="90.0" prefWidth="126.0" text="Gráfico de Linhas Nota de Corte" textAlignment="CENTER" wrapText="true">
                            <GridPane.margin>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </GridPane.margin>
                         </Button>
-                        <Button fx:id="botao2" contentDisplay="BOTTOM" disable="true" graphicTextGap="3.0" layoutX="20.0" layoutY="16.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#abrirF2" prefHeight="90.0" prefWidth="126.0" text="Gráfico de Barras: Notas Mínimas, Médias e Máximas" GridPane.columnIndex="1">
-                           <graphic>
-                              <ImageView fitHeight="51.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" />
-                           </graphic>
+                        <Button fx:id="botao2" contentDisplay="BOTTOM" disable="true" graphicTextGap="3.0" layoutX="20.0" layoutY="16.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#abrirF2" prefHeight="90.0" prefWidth="126.0" text="Gráfico de Barras: Notas Mínimas, Médias e Máximas" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1">
                            <GridPane.margin>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </GridPane.margin>
                         </Button>
-                        <Button fx:id="botao3" contentDisplay="BOTTOM" disable="true" graphicTextGap="3.0" layoutX="161.0" layoutY="16.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#abrirF3" prefHeight="90.0" prefWidth="126.0" text="Histograma: Frequência das Notas" GridPane.columnIndex="2">
-                           <graphic>
-                              <ImageView fitHeight="51.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" />
-                           </graphic>
+                        <Button fx:id="botao3" contentDisplay="BOTTOM" disable="true" graphicTextGap="3.0" layoutX="161.0" layoutY="16.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#abrirF3" prefHeight="90.0" prefWidth="126.0" text="Histograma: Frequência das Notas" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="2">
                            <padding>
                               <Insets left="10.0" right="10.0" />
                            </padding>
@@ -146,76 +140,52 @@
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </GridPane.margin>
                         </Button>
-                        <Button fx:id="botao4" contentDisplay="BOTTOM" disable="true" graphicTextGap="3.0" layoutX="317.0" layoutY="16.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#abrirF4" prefHeight="90.0" prefWidth="126.0" text="Top 10 Cursos com Maior Nota de Corte " GridPane.columnIndex="3">
-                           <graphic>
-                              <ImageView fitHeight="51.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" />
-                           </graphic>
+                        <Button fx:id="botao4" contentDisplay="BOTTOM" disable="true" graphicTextGap="3.0" layoutX="317.0" layoutY="16.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#abrirF4" prefHeight="90.0" prefWidth="126.0" text="Top 10 Cursos com Maior Nota de Corte " textAlignment="CENTER" wrapText="true" GridPane.columnIndex="3">
                            <GridPane.margin>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </GridPane.margin>
                         </Button>
-                        <Button fx:id="botao5" contentDisplay="BOTTOM" disable="true" graphicTextGap="3.0" layoutX="473.0" layoutY="16.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#abrirF5" prefHeight="90.0" prefWidth="126.0" text="Tabela de Análise por Estado" GridPane.columnIndex="4">
-                           <graphic>
-                              <ImageView fitHeight="51.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" />
-                           </graphic>
+                        <Button fx:id="botao5" contentDisplay="BOTTOM" disable="true" graphicTextGap="3.0" layoutX="473.0" layoutY="16.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#abrirF5" prefHeight="90.0" prefWidth="126.0" text="Tabela de Análise por Estado" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="4">
                            <GridPane.margin>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </GridPane.margin>
                         </Button>
-                        <Button fx:id="botao6" contentDisplay="BOTTOM" disable="true" graphicTextGap="3.0" layoutX="161.0" layoutY="16.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#abrirF6" prefHeight="90.0" prefWidth="126.0" text="Tabela Comparativa das notas de corte entre dois anos" GridPane.rowIndex="1">
-                           <graphic>
-                              <ImageView fitHeight="51.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" />
-                           </graphic>
+                        <Button fx:id="botao6" contentDisplay="BOTTOM" disable="true" graphicTextGap="3.0" layoutX="161.0" layoutY="16.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#abrirF6" prefHeight="90.0" prefWidth="126.0" text="Tabela Comparativa das notas de corte entre dois anos" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="1">
                            <GridPane.margin>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </GridPane.margin>
                         </Button>
-                        <Button fx:id="botao7" contentDisplay="BOTTOM" disable="true" graphicTextGap="3.0" layoutX="161.0" layoutY="16.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#abrirF7" prefHeight="90.0" prefWidth="126.0" text="Simulação: Em que cursos eu passava?" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                           <graphic>
-                              <ImageView fitHeight="51.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" />
-                           </graphic>
+                        <Button fx:id="botao7" contentDisplay="BOTTOM" disable="true" graphicTextGap="3.0" layoutX="161.0" layoutY="16.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#abrirF7" prefHeight="90.0" prefWidth="126.0" text="Simulação: Em que cursos eu passava?" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <GridPane.margin>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </GridPane.margin>
                         </Button>
-                        <Button fx:id="botao8" contentDisplay="BOTTOM" disable="true" graphicTextGap="3.0" layoutX="161.0" layoutY="16.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#abrirF8" prefHeight="90.0" prefWidth="126.0" text="Simular seu Resultado no SISU" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                           <graphic>
-                              <ImageView fitHeight="51.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" />
-                           </graphic>
+                        <Button fx:id="botao8" contentDisplay="BOTTOM" disable="true" graphicTextGap="3.0" layoutX="161.0" layoutY="16.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#abrirF8" prefHeight="90.0" prefWidth="126.0" text="Simular seu Resultado no SISU" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
                            <GridPane.margin>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </GridPane.margin>
                         </Button>
-                        <Button fx:id="botao9" contentDisplay="BOTTOM" disable="true" graphicTextGap="3.0" layoutX="10.0" layoutY="117.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#abrirF9" prefHeight="90.0" prefWidth="126.0" text="Gráfico de Pizza: Participação % por Demanda" GridPane.columnIndex="3" GridPane.rowIndex="1">
-                           <graphic>
-                              <ImageView fitHeight="51.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" />
-                           </graphic>
+                        <Button fx:id="botao9" contentDisplay="BOTTOM" disable="true" graphicTextGap="3.0" layoutX="10.0" layoutY="117.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#abrirF9" prefHeight="90.0" prefWidth="126.0" text="Gráfico de Pizza: Participação % por Demanda" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
                            <GridPane.margin>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </GridPane.margin>
                         </Button>
-                        <Button fx:id="botao10" contentDisplay="BOTTOM" disable="true" graphicTextGap="3.0" layoutX="10.0" layoutY="218.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#abrirF10" prefHeight="90.0" prefWidth="126.0" text="Consultar Por Nome" GridPane.columnIndex="4" GridPane.rowIndex="1">
-                           <graphic>
-                              <ImageView fitHeight="51.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" />
-                           </graphic>
+                        <Button fx:id="botao10" contentDisplay="BOTTOM" disable="true" graphicTextGap="3.0" layoutX="10.0" layoutY="218.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#abrirF10" prefHeight="90.0" prefWidth="126.0" text="Consultar Por Nome" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="4" GridPane.rowIndex="1">
                            <GridPane.margin>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </GridPane.margin>
                         </Button>
                      </children>
                   </GridPane>
-                  <BorderPane layoutX="12.0" layoutY="34.0" prefHeight="39.0" prefWidth="619.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="20.0">
+                  <BorderPane layoutX="12.0" layoutY="34.0" maxHeight="1.7976931348623157E308" prefHeight="39.0" prefWidth="619.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="20.0">
                      <right>
                         <Button fx:id="botaoAjuda" mnemonicParsing="false" onAction="#abrirAjuda" prefHeight="29.0" prefWidth="106.0" text="Help" BorderPane.alignment="CENTER" />
                      </right>
                      <center>
-                        <TextArea fx:id="txtInfo" editable="false" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-                           <BorderPane.margin>
-                              <Insets right="20.0" />
-                           </BorderPane.margin>
-                        </TextArea>
+                        <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="38.0" prefWidth="431.0" text="Bem vindo(a)! Explore os dados dos candidatos aprovados pelo SISU na UFS (2019-2025). As funcionalidades são liberadas conforme você ajusta os filtros. " textFill="#000000cc" wrapText="true" BorderPane.alignment="CENTER" />
                      </center>
                   </BorderPane>
+                  <Label layoutX="40.0" layoutY="148.0" prefHeight="34.0" prefWidth="559.0" text="Para limpar um filtro, aperte o botão 'x' à esquerda da respectiva caixa de seleção. Consulte detalhes das funcionalidades e da aplicação no botão 'Help'." textFill="#000000cc" wrapText="true" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" />
                </children>
             </AnchorPane>
          </content>
