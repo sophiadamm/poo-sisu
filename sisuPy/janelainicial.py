@@ -13,6 +13,7 @@ from aumento_nota_cont import AumentoNotaController
 from simulacao_sisu import SimulacaoSisuController
 from simulacao_cursos import SimulacaoCursosController
 from consultanome import ConsultaNomeController
+from graficobarra import GraficoBarra
 
 class JanelaInicial(QMainWindow):
     def __init__(self):
@@ -186,6 +187,10 @@ class JanelaInicial(QMainWindow):
 
     def abrirF2(self):
         print("Abriu botao 2")
+        widget = GraficoBarra()
+        self.ui.tabWidget.addTab(widget, "Grafico Barra")
+        self.ui.tabWidget.setCurrentWidget(widget)
+        widget.setDados(self.filtrar_dados())
         pass
 
     def abrirF3(self):
