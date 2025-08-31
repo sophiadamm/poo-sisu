@@ -5,6 +5,8 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget
 from visual.ui_janelaprincipal import Ui_MainWindow
 from graficopizza import PizzaDemandaWidget
 from dados import Dados
+from PyQt5 import QtWidgets, uic
+from PyQt5.QtWidgets import QApplication, QMainWindow, QTabWidget, QPushButton, QWidget
 
 class JanelaInicial(QMainWindow):
     def __init__(self):
@@ -127,6 +129,25 @@ class JanelaInicial(QMainWindow):
 
         return filtros
 
+    def filtrar_dados(self):
+        dados_filtrados = []
+
+        cursoSelecionado = self.ui.filtroCurso.currentText()
+        anoSelecionado = self.ui.filtroAno.currentText()
+        campusSelecionado = self.ui.filtroCampus.currentText()
+        demandaSelecionada = self.ui.filtroDemanda.currentText()
+
+        for candidato in self.dados_sisu:
+            valida_ano = (anoSelecionado == "Ano" or str(candidato.ano) == anoSelecionado)
+            valida_curso = (cursoSelecionado == "Curso" or candidato.curso == cursoSelecionado)
+            valida_campus = (campusSelecionado == "Campus" or candidato.campus == campusSelecionado)
+            valida_demanda = (demandaSelecionada == "Demanda" or candidato.demanda == demandaSelecionada)
+
+            if valida_ano and valida_curso and valida_campus and valida_demanda:
+                dados_filtrados.append(candidato)
+        
+        return dados_filtrados
+
     def limpar_ano(self):
         self.ui.filtroAno.setCurrentIndex(0)
         self.atualizar()
@@ -144,6 +165,16 @@ class JanelaInicial(QMainWindow):
         self.atualizar()
 
     def abrirF1(self):
+        nova_aba = QWidget()
+
+        caminho_base = os.path.dirname(__file__)
+        caminho_ui = os.path.join(caminho_base, "visual", "Grafico1.ui")
+
+        uic.loadUi(caminho_ui, nova_aba)
+        
+        self.ui.tabWidget.addTab(nova_aba, "Gráfico de Linhas")
+        
+        self.ui.tabWidget.setCurrentWidget(nova_aba)
         print("Abriu botao 1")
         pass
 
