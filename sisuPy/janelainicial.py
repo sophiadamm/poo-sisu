@@ -18,6 +18,10 @@ from graficolinha import graficolinhaWidget
 from listaTop10 import ListaTop10
 from tabelaestados import TabelaEstados, DadosEstado, DadosTemporarios
 from PyQt5.QtWidgets import QMessageBox
+from PyQt5.QtWidgets import QWidget
+from visual.ui_ajuda import Ui_Form
+from ajuda import AjudaWidget
+
 
 class JanelaInicial(QMainWindow):
     def __init__(self):
@@ -162,7 +166,7 @@ class JanelaInicial(QMainWindow):
         return dados_filtrados
     
     def verificarLista(self) -> bool:
-        tmp = self.filtrarDados()
+        tmp = self.filtrar_dados()
         if tmp is None or len(tmp) == 0:
             msg = QMessageBox(self)
             msg.setIcon(QMessageBox.Critical)  # Ícone de erro
@@ -191,7 +195,9 @@ class JanelaInicial(QMainWindow):
 
     def abrirAjuda(self):
         print("Abriu botao ajuda")
-        
+        widget = AjudaWidget()
+        self.ui.tabWidget.addTab(widget, "Ajuda")
+        self.ui.tabWidget.setCurrentWidget(widget)
         pass
 
     def abrirF1(self):
