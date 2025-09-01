@@ -195,6 +195,9 @@ class JanelaInicial(QMainWindow):
         pass
 
     def abrirF1(self):
+        if not self.verificarLista():
+            return 
+        
         print("Abriu botao 1")
         widget = graficolinhaWidget()
         self.ui.tabWidget.addTab(widget, "Gráfico Linha")
@@ -203,6 +206,9 @@ class JanelaInicial(QMainWindow):
         pass
 
     def abrirF2(self):
+        if not self.verificarLista():
+            return
+        
         print("Abriu botao 2")
         widget = GraficoBarra()
         self.ui.tabWidget.addTab(widget, "Grafico Barra")
@@ -211,6 +217,9 @@ class JanelaInicial(QMainWindow):
         pass
 
     def abrirF3(self):
+        if not self.verificarLista():
+            return
+        
         print("Abriu botao 3")
         widget = HistogramaWidget()
         self.ui.tabWidget.addTab(widget, "Histograma de Notas")
@@ -219,6 +228,9 @@ class JanelaInicial(QMainWindow):
         pass
 
     def abrirF4(self):
+        if not self.verificarLista():
+            return
+        
         print("Abriu botao 4")
         widget = ListaTop10()
         self.ui.tabWidget.addTab(widget, "Lista Top 10")
@@ -227,6 +239,9 @@ class JanelaInicial(QMainWindow):
         pass
 
     def abrirF5(self):
+        if not self.verificarLista():
+            return
+        
         print("Abriu botao 5")
         widget = TabelaEstados()
         self.ui.tabWidget.addTab(widget, "Análise por Estado")
@@ -235,6 +250,9 @@ class JanelaInicial(QMainWindow):
         pass
 
     def abrirF6(self):
+        if not self.verificarLista():
+            return
+        
         print("Abriu botao 6")
         widget = AumentoNotaController()
         title = "Comp Nota"
@@ -244,6 +262,9 @@ class JanelaInicial(QMainWindow):
         pass
 
     def abrirF7(self):
+        if not self.verificarLista():
+            return
+        
         print("Abriu botao 7")
         widget = SimulacaoCursosController()
         title = "Simulacao Cursos"
@@ -256,6 +277,8 @@ class JanelaInicial(QMainWindow):
         pass
 
     def abrirF8(self):
+        if not self.verificarLista():
+            return
         print("Abriu botao 8")
         widget = SimulacaoSisuController()
         title = "Simulacao Sisu"
@@ -265,6 +288,9 @@ class JanelaInicial(QMainWindow):
         pass
 
     def abrirF9(self):
+        if not self.verificarLista():
+            return
+        
         print("Abriu botao 9")
         widget = PizzaDemandaWidget()
         title = "Percentual Demanda"
@@ -275,6 +301,9 @@ class JanelaInicial(QMainWindow):
         pass
 
     def abrirF10(self):
+        if not self.verificarLista():
+            return
+        
         print("Abriu botao 10")
         widget = ConsultaNomeController()
         title = "Consulta Nome"
