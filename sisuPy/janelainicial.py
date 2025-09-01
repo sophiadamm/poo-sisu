@@ -15,6 +15,9 @@ from simulacao_cursos import SimulacaoCursosController
 from consultanome import ConsultaNomeController
 from graficobarra import GraficoBarra
 from graficolinha import graficolinhaWidget
+from listaTop10 import ListaTop10
+from tabelaestados import TabelaEstados, DadosEstado, DadosTemporarios
+from PyQt5.QtWidgets import QMessageBox
 
 class JanelaInicial(QMainWindow):
     def __init__(self):
@@ -48,6 +51,7 @@ class JanelaInicial(QMainWindow):
         self.ui.botao7.setDisabled(True)
         self.ui.botao8.setDisabled(True)
         self.ui.botao9.setDisabled(True)
+        self.ui.botaoAjuda.setDisabled(False)
 
 
         self.preencher_filtros()
@@ -67,6 +71,7 @@ class JanelaInicial(QMainWindow):
         self.ui.botao8.clicked.connect(self.abrirF8)
         self.ui.botao9.clicked.connect(self.abrirF9)
         self.ui.botao10.clicked.connect(self.abrirF10)
+        self.ui.botaoAjuda.clicked.connect(self.abrirAjuda)
 
     
     def preencher_filtros(self):
@@ -110,7 +115,7 @@ class JanelaInicial(QMainWindow):
         self.ui.botao2.setDisabled(not validaCampus or not validaCurso or not validaDemanda or validaAno)
 
         self.ui.botao4.setDisabled(not validaAno or not validaDemanda or validaCurso)
-        self.ui.botao5.setDisabled(not validaAno)
+        self.ui.botao5.setDisabled(not validaAno or anoSelecionado == "2025" or validaCampus)
         
         self.ui.botao6.setDisabled(not validaDemanda or validaAno)
         self.ui.botao7.setDisabled(not validaAno or not validaDemanda or validaCurso)
@@ -155,6 +160,18 @@ class JanelaInicial(QMainWindow):
                 dados_filtrados.append(candidato)
         
         return dados_filtrados
+    
+    def verificarLista(self) -> bool:
+        tmp = self.filtrarDados()
+        if tmp is None or len(tmp) == 0:
+            msg = QMessageBox(self)
+            msg.setIcon(QMessageBox.Critical)  # Ícone de erro
+            msg.setWindowTitle("Nenhum Aprovado Encontrado")
+            msg.setText("Lista de aprovados vazia")
+            msg.setInformativeText("Não foi possível encontrar aprovados com os filtros atuais.\nRedefina seus critérios de busca e tente novamente.")
+            msg.exec_()  # mostra a caixa de diálogo e espera
+            return False
+        return True
 
     def limpar_ano(self):
         self.ui.filtroAno.setCurrentIndex(0)
@@ -171,6 +188,11 @@ class JanelaInicial(QMainWindow):
     def limpar_curso(self):
         self.ui.filtroCurso.setCurrentIndex(0)
         self.atualizar()
+
+    def abrirAjuda(self):
+        print("Abriu botao ajuda")
+        
+        pass
 
     def abrirF1(self):
         print("Abriu botao 1")
@@ -198,10 +220,18 @@ class JanelaInicial(QMainWindow):
 
     def abrirF4(self):
         print("Abriu botao 4")
+        widget = ListaTop10()
+        self.ui.tabWidget.addTab(widget, "Lista Top 10")
+        self.ui.tabWidget.setCurrentWidget(widget)
+        widget.setDados(self.filtrar_dados(), self.filtrosSelecionados())
         pass
 
     def abrirF5(self):
         print("Abriu botao 5")
+        widget = TabelaEstados()
+        self.ui.tabWidget.addTab(widget, "Análise por Estado")
+        self.ui.tabWidget.setCurrentWidget(widget)
+        widget.setDados(self.filtrar_dados(), self.filtrosSelecionados())
         pass
 
     def abrirF6(self):
