@@ -8,6 +8,8 @@ Sophia Damm Zogaib Mardones
 ## 2. Link para o Repositório: 
 https://github.com/sophiadamm/poo-sisu/
 
+[Para executar so projetos em Pyhton, certificar-se de que esta no respectivo diretório]
+
 ## 3. Descrição do Tema do Trabalho
 Este projeto consiste na implementação de uma interface gráfica para exploração e análise dos dados de candidatos aprovados na chamada regular do Sistema de Seleção Unificada (SISU) para a Universidade Federal de Sergipe (UFS), abrangendo o período de 2019 a 2025.
 O objetivo principal foi desenvolver uma aplicação que permita visualizar as informações de múltiplas formas, como gráficos (barras, linhas e pizza), tabelas e listas, servindo como prática para os conceitos do paradigma de Programação Orientada a Objetos (POO).
@@ -37,7 +39,7 @@ As 10 funcionalidades que conseguimos desenvolver foram:
 1. Gráfico de Linhas (Ano × Nota de Corte)
 Permite acompanhar a evolução da nota de corte de um curso ao longo dos anos, destacando a trajetória em diferentes campus.
 2. Gráfico de Barras (Notas Máximas, Mínimas e Médias)
-Exibe o comportamento estatístico das notas em um campus específico ao longo do tempo.
+Exibe o comportamento estatístico das notas de um curso em um campus específico ao longo do tempo.
 3. Histograma de Frequência de Notas
 Analisa a distribuição das notas dos aprovados dentro do recorte definido pelos filtros aplicados pelo usuário.
 4. Top 10 Cursos com Maior Nota de Corte
@@ -73,7 +75,7 @@ Por fim, o uso de classes em Python é essencial para dividir responsabilidades 
 - classes para a lógica funcional (que utilizam instâncias das classes da interface para adicionar comportamento)
 - classes para armazenamento de dados 
 - classes para métodos utilitários
-- 
+  
 Conseguimos manter o código mais organizado, modular e reutilizável. Essa abordagem se torna ainda mais importante em projetos como o nosso, que foi desenvolvido de forma coletiva.
 
 Assim, percebemos que a POO em Python é mais voltada à disciplina do programador, de ser fiel aos conceitos e processos, do que a restrições impostas pela própria linguagem. Por esse motivo, Python oferece uma alternativa mais flexível, simples e menos verbosa que Java, mas com menos garantias formais de encapsulamento.
